@@ -1,0 +1,16 @@
+version: '3'
+services:
+	perforce:
+		build:
+			context: .
+			dockerfile: Dockerfile
+		restart: unless-stopped
+		volumes:
+			- ./perforce-data:/perforce-data
+      - ./p4dctl.conf.d:/etc/perforce/p4dctl.conf.d
+			- ./dbs:/dbs
+		environment:
+			- P4PORT=1666
+			- P4ROOT=/perforce-data
+		ports:
+			- 1666:1666
